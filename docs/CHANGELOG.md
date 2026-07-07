@@ -25,6 +25,13 @@ Connection model mirrors Bambu (persistent push, not request/response polling): 
 ```bash
 npm install ws
 ```
+## 2026-07-06 - update.bat: discard package-lock.json drift before pulling
+
+`update.bat` runs `npm install`, which rewrites `package-lock.json` when the farm machine's npm version differs from the one that generated the lockfile. That local drift blocked `git pull` ("Your local changes ... would be overwritten by merge") the first time the lockfile changed upstream (the 2026-07-03 js-yaml bump). Hit on a real farm machine 2026-07-06.
+
+### Changes
+- `update.bat`: step 1 now runs `git checkout -- package-lock.json client/package-lock.json` before `git pull`. The farm checkout is a deploy target with no intentional local changes, so discarding lockfile drift is always safe there.
+- `docs/installation.md`: documented the discard step and the manual `git restore package-lock.json` recovery for older copies of the script.
 
 ---
 
