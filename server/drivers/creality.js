@@ -182,6 +182,10 @@ function mapStatus(s, conn) {
     if (state === 2) { conn.finishReported = true; return 'FINISHED'; }
     if (state === 4) { conn.finishReported = true; return 'STOPPED'; }
   }
+  
+  // If telemetry is garbled/missing, hold the printer safely as UNKNOWN
+  if (state === null && device === null) return 'UNKNOWN';
+
   return 'IDLE';
 }
 

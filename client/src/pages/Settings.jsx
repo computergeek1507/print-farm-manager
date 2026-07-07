@@ -32,7 +32,7 @@ const CONNECTOR_LABEL = {
   'creality':         'Creality (K/Ender series)',
 };
 // Connector types that do not use an API key
-const NO_API_KEY_TYPES = new Set(['elegoo-centauri', 'klipper', 'creality']);
+const NO_API_KEY_TYPES = new Set(['elegoo-centauri', 'klipper']);
 
 // Per-brand hints on where to find connection credentials
 const CREDENTIAL_HELP = {
@@ -800,12 +800,12 @@ export default function Settings() {
             {!NO_API_KEY_TYPES.has(addForm.type) && (
               <div>
                 <label style={{ display: 'block', fontSize: 12, color: '#94a3b8', marginBottom: 4 }}>
-                  {addForm.type === 'bambu' || addForm.type === 'elegoo-centauri2' ? 'Access Code *' : 'API Key *'}
+                  {addForm.type === 'bambu' || addForm.type === 'elegoo-centauri2' ? 'Access Code *' : addForm.type === 'creality' ? 'API Key (Optional)' : 'API Key *'}
                 </label>
                 <input
                   value={addForm.api_key}
                   onChange={e => setAddForm(p => ({ ...p, api_key: e.target.value }))}
-                  required
+                  required={addForm.type !== 'creality'}
                   placeholder={addForm.type === 'bambu' || addForm.type === 'elegoo-centauri2' ? 'Ab12Cd' : 'xxxxxxxxxxxxxxxx'}
                   style={inputStyle}
                 />

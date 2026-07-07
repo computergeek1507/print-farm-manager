@@ -177,7 +177,7 @@ export default function PrinterDetail() {
     }
   }
 
-  const NO_API_KEY_TYPES = new Set(['elegoo-centauri', 'klipper', 'creality']);
+  const NO_API_KEY_TYPES = new Set(['elegoo-centauri', 'klipper']);
 
   function startEditDetails() {
     setDetailsDraft({
@@ -351,7 +351,7 @@ export default function PrinterDetail() {
               </label>
               {!NO_API_KEY_TYPES.has(printer.type) && (
                 <label style={detailLabelStyle}>
-                  API Key
+                  {printer.type === 'creality' ? 'API Key (Optional)' : 'API Key'}
                   <input
                     value={detailsDraft.api_key}
                     onChange={e => setDetailsDraft(d => ({ ...d, api_key: e.target.value }))}
