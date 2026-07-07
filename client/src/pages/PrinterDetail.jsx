@@ -177,7 +177,7 @@ export default function PrinterDetail() {
     }
   }
 
-  const NO_API_KEY_TYPES = new Set(['elegoo-centauri', 'klipper']);
+  const NO_API_KEY_TYPES = new Set(['elegoo-centauri', 'klipper', 'creality']);
 
   function startEditDetails() {
     setDetailsDraft({
